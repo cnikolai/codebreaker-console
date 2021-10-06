@@ -2,10 +2,27 @@ package edu.cnm.deepdive.codebreaker.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import edu.cnm.deepdive.codebreaker.model.Game;
+import edu.cnm.deepdive.codebreaker.model.Guess;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface WebServiceProxy {
+
+  // What is the path that we are going to send this? Note: this is relative to base url from retrofit below
+  @POST("codes")
+  Call<Game> startGame(@Body Game game); //send game request in body of request.
+
+  @POST("codes/{gameId}/guesses")
+  Call<Guess> submitGuess(@Body Guess guess, @Path("gameId") String gameId); //name of placeholder where gameId goes in the path
+
+  static WebServiceProxy getInstance() {
+    return InstanceHolder.INSTANCE;
+  }
 
   class InstanceHolder {
 
