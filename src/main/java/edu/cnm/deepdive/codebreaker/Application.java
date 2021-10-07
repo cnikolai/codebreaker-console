@@ -80,7 +80,7 @@ public class Application {
   }
 
   private Guess submitGuess(String text) throws IOException, BadGuessException {
-    return repository.submitGuess(game, getGuess());
+    return repository.submitGuess(game, text);
   }
 
   private void printGuessResults(Guess guess) {

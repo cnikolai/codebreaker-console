@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.codebreaker.model.Game;
 import edu.cnm.deepdive.codebreaker.model.Guess;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -33,9 +36,15 @@ public interface WebServiceProxy {
           .excludeFieldsWithoutExposeAnnotation()
           .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ") //to GSON: when you recieve a data-time, format it, when you send it, send it this way
           .create();
+      HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+      interceptor.setLevel(Level.NONE);
+      OkHttpClient client = new OkHttpClient.Builder()
+          .addInterceptor(interceptor)
+          .build();
       Retrofit retrofit = new Retrofit.Builder()
           .baseUrl("https://ddc-java.services/codebreaker/")
           .addConverterFactory(GsonConverterFactory.create(gson))
+          .client(client)
           .build();
       INSTANCE = retrofit.create(WebServiceProxy.class);
     }
