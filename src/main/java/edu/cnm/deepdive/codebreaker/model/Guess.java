@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 
 public class Guess {
 
-  //want gson to read data from outside world and populate these fields when it does
+  // Want gson to read data from outside world and populate these fields when it does
   @Expose
   private String id;
 
