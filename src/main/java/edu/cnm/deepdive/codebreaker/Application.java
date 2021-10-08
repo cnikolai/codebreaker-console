@@ -6,6 +6,7 @@ import edu.cnm.deepdive.codebreaker.service.GameRepository;
 import edu.cnm.deepdive.codebreaker.service.GameRepository.BadGameException;
 import edu.cnm.deepdive.codebreaker.service.GameRepository.BadGuessException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
